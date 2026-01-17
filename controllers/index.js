@@ -3,4 +3,4 @@ const firstWord = (req, res) => {
 };
 
 
-module.exports = firstWord;
+module.exports ={firstWord} ;

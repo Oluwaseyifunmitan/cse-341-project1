@@ -1,6 +1,7 @@
 const routes = require("express").Router();
-const lesson1Controller = require("../controllers/index");
+const { firstWord } = require("../controllers/index"); // <-- destructure here
 
-routes.get("/", lesson1Controller.firstWord);
+routes.get("/", firstWord);
+routes.use("/users", require('./users'))
 
 module.exports = routes;
