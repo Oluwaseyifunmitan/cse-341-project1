@@ -60,7 +60,7 @@ const updateContact = async (req, res) => {
   const response = await mongodb
     .getDatabase()
     .db()
-    .collection("contacts")
+    .collection("Contacts")
     .replaceOne({ _id: contactId }, contact);
   console.log(response);
   if (response.modifiedCount > 0) {
@@ -79,7 +79,7 @@ const deleteContact = async (req, res) => {
   const response = await mongodb
     .getDatabase()
     .db()
-    .collection("contacts")
+    .collection("Contacts")
     .remove({ _id: contactId }, true);
   console.log(response);
   if (response.deletedCount > 0) {
