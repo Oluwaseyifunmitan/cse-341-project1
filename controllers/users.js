@@ -75,24 +75,24 @@ const updateContact = async (req, res) => {
 };
 
 const deleteContact = async (req, res) => {
-  const contactId = new ObjectId(req.params.id);
-  const response = await mongodb
-    .getDatabase()
-    .db()
-    .collection("Contacts")
-    .remove({ _id: contactId }, true);
-  console.log(response);
-  if (response.deletedCount > 0) {
-    res.status(204).send();
-  } else {
-    res
-      .status(500)
-      .json(
-        response.error || "Some error occurred while deleting the contact.",
-      );
+  try {
+    const contactId = new ObjectId(req.params.id);
+
+    const response = await mongodb
+      .getDatabase()
+      .db()
+      .collection("Contacts")
+      .deleteOne({ _id: contactId });
+
+    if (response.deletedCount === 1) {
+      return res.status(204).send();
+    } else {
+      return res.status(404).json({ message: "Contact not found" });
+    }
+  } catch (error) {
+    res.status(500).json({ error: error.message });
   }
 };
-
 module.exports = {
   getAll,
   getSingle,
